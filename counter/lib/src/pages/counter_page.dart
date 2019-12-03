@@ -66,7 +66,7 @@ class _CounterPageState extends State<CounterPage> {
                 Text('$_counterCount',
                   style: TextStyle(
                     fontSize: 30.0,
-                    color: Colors.deepPurple
+                    color: Colors.deepOrange
                   ),
                 )
               ],
