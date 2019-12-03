@@ -2,4 +2,4 @@
 
 A simple Flutter project to learn about Stateless and Stateful widgets.
 
-![](counter_app.png)
+![](https://raw.githubusercontent.com/ach4m0/flutter-playground/master/counter/counter_app.png)
