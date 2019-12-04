@@ -1,4 +1,4 @@
-class UserModel {
+class ContactModel {
 
   String uuid;
   String firstName;
@@ -8,7 +8,7 @@ class UserModel {
   String email;
   Object location;
 
-  UserModel.fromJson(Map<String, dynamic> parsedJson) {
+  ContactModel.fromJson(Map<String, dynamic> parsedJson) {
     uuid = parsedJson['login']['uuid'];
     firstName = parsedJson['name']['first'];
     lastName = parsedJson['name']['last'];
@@ -18,7 +18,7 @@ class UserModel {
     location = parsedJson['location'];
   }
 
-  UserModel({
+  ContactModel({
     this.uuid,
     this.firstName,
     this.lastName,
