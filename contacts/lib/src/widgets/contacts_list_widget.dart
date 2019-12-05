@@ -14,6 +14,7 @@ class _ContactsListWidgetState extends State<ContactsListWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<List<ContactModel>>(
       future: RandomUserService.getContacts(),
+      initialData: [],
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if(snapshot.hasData) {
           return _getListViewUsers(snapshot.data);
@@ -40,7 +41,7 @@ class _ContactsListWidgetState extends State<ContactsListWidget> {
             )
           ),
           onTap: () {
-            Navigator.of(context).pushNamed('/contact', arguments: {contact: contact});
+            Navigator.pushNamed(context, '/contact', arguments: {'contact': contact});
           },
         )
       );

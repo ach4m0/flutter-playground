@@ -3,30 +3,60 @@ import 'package:flutter/material.dart';
 
 import 'package:contacts/src/models/contact_model.dart';
 
-class ContactDetailsPage extends StatelessWidget {
+class ContactDetailsPage extends StatefulWidget {
 
-  final ContactModel contact;
+  final contact;
 
-  const ContactDetailsPage({Key key, @required this.contact}) : super(key: key);
+  ContactDetailsPage({this.contact});
+
+  @override
+  _ContactDetailsPageState createState() => _ContactDetailsPageState(contact: contact);
+}
+
+class _ContactDetailsPageState extends State<ContactDetailsPage> {
+
+  ContactModel contact;
+
+  _ContactDetailsPageState({this.contact});
 
   @override
   Widget build(BuildContext context) {
+
+    final Map arguments = ModalRoute.of(context).settings.arguments as Map;
+    this.contact = arguments['contact'];
+
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(Icons.keyboard_arrow_left),
-        ),
-      ),
-      body:  Container(
-        child: Hero(
-            tag: contact.uuid,
-            child: ClipRRect(
-              child: Image.network(contact.picUrl),
+      body:  NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 200.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: false,
+                  title: Text(contact.firstName,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      )),
+                  background: Hero(
+                    tag: contact.uuid,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(0),
+                      child: Image.network(
+                            contact.picUrl,
+                            fit: BoxFit.cover,
+                      )
+                    )
+                  ),
+              )
             ),
-        ),
+          ];
+        },
+        body: Center(
+          child: Text("Sample Text"),
+        )
       )
     );
   }
