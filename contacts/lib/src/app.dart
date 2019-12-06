@@ -10,8 +10,8 @@ class ContactsApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.green,
-        accentColor: Colors.greenAccent
+        primaryColor: Colors.purple,
+        accentColor: Colors.purpleAccent
       ),
       routes: {
         '/': (context) => ContactsListPage(),

@@ -5,19 +5,13 @@ import 'package:contacts/src/models/contact_model.dart';
 
 class ContactDetailsPage extends StatefulWidget {
 
-  final contact;
-
-  ContactDetailsPage({this.contact});
-
   @override
-  _ContactDetailsPageState createState() => _ContactDetailsPageState(contact: contact);
+  _ContactDetailsPageState createState() => _ContactDetailsPageState();
 }
 
 class _ContactDetailsPageState extends State<ContactDetailsPage> {
 
   ContactModel contact;
-
-  _ContactDetailsPageState({this.contact});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +29,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
-                  title: Text(contact.firstName,
+                  title: Text('${contact.firstName} ${contact.lastName}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
@@ -54,8 +48,41 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
             ),
           ];
         },
-        body: Center(
-          child: Text("Sample Text"),
+        body: ListView(
+          padding: EdgeInsets.symmetric(vertical: 10.0),
+          children: <Widget>[
+            ListTile(
+              title: Text(contact.phone),
+              subtitle: Text('Mobile'),
+              leading: Icon(Icons.phone),
+            ),
+            Divider(),
+            ListTile(
+              title: Text(contact.email),
+              subtitle: Text('Email'),
+              leading: Icon(Icons.email)
+            ),
+            Divider(),
+            Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text('${contact.location.name} ${contact.location.number}'),
+                  subtitle: Text('Address'),
+                  leading: Icon(Icons.home),
+                ),
+                ListTile(
+                  title: Text(contact.location.city),
+                  subtitle: Text('City'),
+                  leading: SizedBox(),
+                ),
+                ListTile(
+                  title: Text(contact.location.state),
+                  subtitle: Text('State'),
+                  leading: SizedBox(),
+                ),
+              ],
+            ),
+          ],
         )
       )
     );

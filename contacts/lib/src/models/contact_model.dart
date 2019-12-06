@@ -1,3 +1,5 @@
+import 'package:contacts/src/models/location_model.dart';
+
 class ContactModel {
 
   String uuid;
@@ -6,7 +8,7 @@ class ContactModel {
   String phone;
   String picUrl;
   String email;
-  Object location;
+  LocationModel location;
 
   ContactModel.fromJson(Map<String, dynamic> parsedJson) {
     uuid = parsedJson['login']['uuid'];
@@ -15,7 +17,7 @@ class ContactModel {
     phone = parsedJson['phone'];
     picUrl = parsedJson['picture']['large'];
     email = parsedJson['email'];
-    location = parsedJson['location'];
+    location = LocationModel.fromJson(parsedJson['location']);
   }
 
   ContactModel({

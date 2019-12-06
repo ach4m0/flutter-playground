@@ -9,7 +9,7 @@ class RandomUserService {
   static Future<List<ContactModel>> getContacts() async {
     List<ContactModel> list = [];
     
-    final response = await http.get('https://randomuser.me/api?results=10');
+    final response = await http.get('https://randomuser.me/api?results=20');
     Map dataMap = json.decode(response.body);
 
     dataMap['results'].forEach( (item) {
