@@ -29,11 +29,13 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
-                  title: Text('${contact.firstName} ${contact.lastName}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                      )),
+                  title: Text(
+                    '${contact.firstName} ${contact.lastName}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    )
+                  ),
                   background: Hero(
                     tag: contact.uuid,
                     child: ClipRRect(

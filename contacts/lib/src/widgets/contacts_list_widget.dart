@@ -9,17 +9,16 @@ class ContactsListWidget extends StatefulWidget {
 }
 
 class _ContactsListWidgetState extends State<ContactsListWidget> {
-
+  List<ContactModel> contacts = [];
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ContactModel>>(
-      future: RandomUserService.getContacts(),
-      initialData: [],
+      future: _getContactsList(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if(snapshot.hasData) {
+        if (snapshot.data.length > 0) {
           return _getListViewUsers(snapshot.data);
-        }else{
+        } else {
           return Center(child: CircularProgressIndicator());
         }
       },
@@ -29,27 +28,31 @@ class _ContactsListWidgetState extends State<ContactsListWidget> {
   Widget _getListViewUsers(data) {
     List<Widget> listTiles = [];
 
-    data.forEach( (contact) {
-      listTiles.add(
-        ListTile(
-          title: Text('${contact.firstName} ${contact.lastName}'),
-          subtitle: Text(contact.phone),
-          leading: Hero(
+    data.forEach((contact) {
+      listTiles.add(ListTile(
+        title: Text('${contact.firstName} ${contact.lastName}'),
+        subtitle: Text(contact.phone),
+        leading: Hero(
             tag: contact.uuid,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
               child: Image.network(contact.picUrl),
-            )
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, '/contact', arguments: {'contact': contact});
-          },
-        )
-      );
+            )),
+        onTap: () {
+          Navigator.pushNamed(context, '/contact',
+              arguments: {'contact': contact});
+        },
+      ));
       listTiles.add(Divider());
     });
 
     return ListView(children: listTiles);
+  }
 
+  Future<List<ContactModel>> _getContactsList() async {
+    if (this.contacts.length == 0) {
+      this.contacts = await RandomUserService.getContacts();
+    }
+    return this.contacts;
   }
 }
