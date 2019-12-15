@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
 class DatePicker extends StatefulWidget {
-  DatePicker({Key key}) : super(key: key);
+
+  InputDecoration inputDecoration;
+  TextStyle style;
+
+  DatePicker({Key key, this.inputDecoration, this.style}) : super(key: key);
 
   @override
-  _DatePickerState createState() => _DatePickerState();
+  _DatePickerState createState() => _DatePickerState(inputDecoration: this.inputDecoration, style: style);
 }
 
 class _DatePickerState extends State<DatePicker> {
+
+  InputDecoration inputDecoration;
+  TextStyle style;
+
+  _DatePickerState({this.inputDecoration, this.style});
 
   String _dateTime;
   TextEditingController _dateController = TextEditingController();
@@ -17,16 +26,12 @@ class _DatePickerState extends State<DatePicker> {
     return TextField(
       enableInteractiveSelection: false,
       controller: _dateController,
-      decoration: InputDecoration(
-        hintText: 'Fecha',
-        labelText: 'Fecha',
-        suffixIcon: Icon(Icons.perm_contact_calendar),
-        icon: Icon(Icons.calendar_today)
-      ),
+      decoration: inputDecoration,
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
         _selectDate(context);
       },
+      style: style,
     );
   }
 

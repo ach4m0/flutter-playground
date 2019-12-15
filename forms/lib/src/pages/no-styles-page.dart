@@ -43,7 +43,12 @@ class NoStylesPage extends StatelessWidget {
           hintText: 'Teléfono',
         ),
       ),
-      DatePicker(),
+      DatePicker(
+        inputDecoration: InputDecoration(
+          labelText: 'Date',
+          prefixIcon: Icon(Icons.calendar_today)
+        ),
+      ),
       TextField(
         maxLines: 4,
         decoration: InputDecoration(
