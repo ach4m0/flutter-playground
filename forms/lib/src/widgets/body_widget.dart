@@ -41,9 +41,7 @@ class BodyWidget extends StatelessWidget {
                     child: Text('CHECKOUT'),
                     color: Colors.deepPurple[700],
                     textColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(4.0),
-                    ),
+                    shape: StadiumBorder(),
                   )
                 ],
                 mainAxisAlignment: MainAxisAlignment.end,
