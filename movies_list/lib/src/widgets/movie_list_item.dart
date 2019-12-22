@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:movies_list/src/models/movie_model.dart';
+
 class MovieListItem extends StatelessWidget {
-  const MovieListItem({Key key}) : super(key: key);
+
+  Movie movie;
+
+  MovieListItem({this.movie});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text('The witcher', style: TextStyle(color: Colors.white),),
-      leading: Image.network('https://s.libertaddigital.com/2019/12/19/1920/1080/fit/the-witcher-netflix.jpg'),
+      title: Text(movie.title, style: TextStyle(color: Colors.white),),
+      leading: Image.network(movie.posterPath),
     );
   }
 }

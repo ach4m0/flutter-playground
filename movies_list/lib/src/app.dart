@@ -12,7 +12,7 @@ class MoviesListApp extends StatelessWidget {
         primaryColor: Color(0xffe50914),
         backgroundColor: Colors.black,
         textTheme: TextTheme(
-          title: GoogleFonts.bebasNeue().copyWith(
+          title: GoogleFonts.montserrat().copyWith(
             fontWeight: FontWeight.bold,
             fontSize: 48.0
           )
