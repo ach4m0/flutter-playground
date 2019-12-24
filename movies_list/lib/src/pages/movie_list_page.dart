@@ -9,9 +9,15 @@ class MovieListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Center(
-        child: MovieList(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        centerTitle: false,
+        title: Text('Now playing',
+        style: Theme.of(context).textTheme.title.copyWith(
+          color: Theme.of(context).primaryColor
+        ),)
       ),
+      body: SafeArea( child: MovieList()),
     );
   }
 }

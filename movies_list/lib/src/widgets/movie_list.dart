@@ -15,34 +15,87 @@ class MovieList extends StatefulWidget {
 class _MovieListState extends State<MovieList> {
 
   int _page = 1;
-  List<Movie> movies = [];
-  MoviesService moviesService = MoviesService();
+  bool _isLoading = false;
+  List<Movie> _movies = List();
+  MoviesService _moviesService = MoviesService();
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    
+    _scrollController.addListener(_onScroll);
+
+    // Load initial items
+    _fetchMovies();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // Stopping the scroll controller
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child:
-          // Text('Now playing',
-          //   style: Theme.of(context).textTheme.title.copyWith(
-          //     color: Theme.of(context).primaryColor,
-          //   ),
-          // ),
-          FutureBuilder(
-            future: moviesService.getNowPlaying(_page),
-            builder: (context, AsyncSnapshot<List<Movie>> snapshot){
-              if(snapshot.hasData){
-                return Text('Hay datos',
-                  style: Theme.of(context).textTheme.title.copyWith(
-                    color: Theme.of(context).primaryColor,
-                  )
-                );
-              }else{
-                return Center(
-                  child: CircularProgressIndicator()
-                );
-              }
-            },
-          )
-      );
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: RefreshIndicator(
+        onRefresh: () {
+          _page = 1;
+          _movies.clear();
+          return _fetchMovies();
+        },
+        child: Stack(
+          children: <Widget>[
+            ListView.builder(
+              controller: _scrollController,
+              itemCount: _movies.length,
+              itemBuilder: (BuildContext context, int index) {
+                return MovieListItem(movie: _movies[index]);
+              },
+            ),
+            _isLoading ?
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+                    )
+                  ],
+                ),
+              ) : 
+              Container()
+          ]
+        ),
+      ),
+    );
   }
+
+  _fetchMovies() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    List<Movie> list = await _moviesService.getNowPlaying(_page);
+    
+    setState(() {
+      _isLoading = false;
+      _movies.addAll(list);
+      _page++;
+    });
+  }
+
+  _onScroll() async {
+    if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      await _fetchMovies();
+      _scrollController.animateTo(_scrollController.offset + 50.0,
+        duration: Duration(milliseconds: 100),
+        curve: ElasticInOutCurve()
+      );
+    }
+  }
+
 }
