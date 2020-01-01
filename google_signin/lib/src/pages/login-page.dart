@@ -16,20 +16,22 @@ class LoginPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 2,
           child: Consumer<LoginProvider>(
             builder: (BuildContext context, LoginProvider loginProvider, _){
-              return RaisedButton(
-                color: Colors.blue,
-                elevation: 8.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Icon(FontAwesomeIcons.google, color: Colors.white,),
-                    Text('Sign in with Google', style: TextStyle(color: Colors.white),)
-                  ],
-                ),
-                onPressed: () {
-                  loginProvider.login();
-                },
-              );
+              return loginProvider.isLoading ?
+                CircularProgressIndicator() :
+                RaisedButton(
+                  color: Colors.blue,
+                  elevation: 8.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Icon(FontAwesomeIcons.google, color: Colors.white,),
+                      Text('Sign in with Google', style: TextStyle(color: Colors.white),)
+                    ],
+                  ),
+                  onPressed: () {
+                    loginProvider.login();
+                  },
+                );
             }
           ), 
         ),
