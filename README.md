@@ -16,6 +16,8 @@ This is a repository to practice and play with the Flutter SDK.
 
 * [Animated Container](https://github.com/ach4m0/flutter-playground/tree/master/animated_container) : A simple Flutter project to learn about AnimatedContainer.
 
+* [Slider](https://github.com/ach4m0/flutter-playground/tree/master/sliders) : A simple sample to learn about Sliders, Checkbox and Switch controls.
+
 * [Movies List](https://github.com/ach4m0/flutter-playground/tree/master/movies_list) : A simple Flutter project getting data from TheMoviesDB.org API and showing with a infinite scroll list.
 
 * [Google Sign In](https://github.com/ach4m0/flutter-playground/tree/master/google_signin) : A simple Flutter project using Firebase Auth and Google Signin. Also I have used a Provider pattern design.
