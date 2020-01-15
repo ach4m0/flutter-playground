@@ -34,7 +34,11 @@ class _MovieGridState extends State<MovieGrid> {
       padding: EdgeInsets.all(10.0),
       child: GridView.builder(
         controller: _scrollController,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.7,
+          mainAxisSpacing: 30.0
+        ),
         itemCount: movies.length,
         itemBuilder: (BuildContext context, int index) {
           return MovieGridItem(movie: movies[index]);

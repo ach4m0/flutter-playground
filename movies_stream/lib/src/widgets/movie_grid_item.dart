@@ -9,21 +9,37 @@ class MovieGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8.0),
-      width: 200,
-      child: Stack(
-        fit: StackFit.loose,
-        alignment: AlignmentDirectional.topCenter,
-        overflow: Overflow.visible,
-        children: <Widget>[
-          Text('${movie.title}', style: TextStyle(color: Colors.white, fontSize: 20.0)),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: Image(image: NetworkImage(movie.poster)),
-          ),
-        ],
-      ),
+    return ListView(
+      children: [
+        Column(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 10.0
+                  )
+                ]
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image(
+                  image: NetworkImage(movie.poster),
+                  height: 200.0,
+                ),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              '${movie.title}',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.0
+              )
+            ),
+          ],
+        ),
+      ]
     );
   }
 }
